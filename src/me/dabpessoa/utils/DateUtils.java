@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 
 public class DateUtils {
@@ -29,6 +30,11 @@ public class DateUtils {
 	
 	public static Date putActualTimeIn(Date date) {
 		return putTimeIn(date, new Date());
+	}
+	
+	public static long daysBetween(Date d1, Date d2) {
+	    long diff = d2.getTime() - d1.getTime();
+	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
 	public static Date putTimeIn(Date target, Date source) {
