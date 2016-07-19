@@ -74,6 +74,15 @@ public class RegexUtils {
 		return null;
 	}
 	
+	public static String findFirstMatch(String regex, String value) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(value);
+
+		while (matcher.find()) {
+			return matcher.group();
+		} return null;
+	}
+	
 	public static String[] split(String regex, String value) {
 		if (value == null) return null;
 		return value.split(regex);
