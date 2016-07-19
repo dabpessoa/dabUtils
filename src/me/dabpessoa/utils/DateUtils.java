@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
+
 
 public class DateUtils {
 
@@ -24,6 +26,32 @@ public class DateUtils {
 		GregorianCalendar dataAtual = new GregorianCalendar();
 		dataAtual.add( GregorianCalendar.DATE , quantidadeDias);		
 		return dataAtual.getTime();
+	}
+	
+	public static Date putActualTimeIn(Date date) {
+		return putTimeIn(date, new Date());
+	}
+	
+	public static long daysBetween(Date d1, Date d2) {
+	    long diff = d2.getTime() - d1.getTime();
+	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+	}
+	
+	public static Date putTimeIn(Date target, Date source) {
+		Calendar targetParam = parseDateToCalendar(target);
+		Calendar sourceParam = Calendar.getInstance();
+		sourceParam.setTime(source);
+		targetParam.set(Calendar.HOUR, sourceParam.get(Calendar.HOUR));
+		targetParam.set(Calendar.MINUTE, sourceParam.get(Calendar.MINUTE));
+		targetParam.set(Calendar.SECOND, sourceParam.get(Calendar.SECOND));
+		return targetParam.getTime();
+	}
+	
+	public static Date add(Date date, int field, int amount){
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(field, amount);
+		return c.getTime();
 	}
 	
 	public static boolean after(Date d1, Date d2, String format) {
@@ -54,6 +82,12 @@ public class DateUtils {
 		}
 	}
 	
+	public static int extractYear(Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		return c.get(Calendar.YEAR);
+	}
+	
 	public static boolean before(Date d1, Date d2) {
 		return before(d1, d2, "dd/MM/yyyy");
 	}
@@ -76,13 +110,6 @@ public class DateUtils {
 			e.printStackTrace();
 			return false;
 		}
-	}
-	
-	public static Date add(Date date, int field, int amount){
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		c.add(field, amount);
-		return c.getTime();
 	}
 	
 	public static boolean equals(Date d1, Date d2) {
