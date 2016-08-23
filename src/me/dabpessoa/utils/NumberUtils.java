@@ -11,6 +11,9 @@ import java.text.DecimalFormatSymbols;
  */
 public class NumberUtils {
 
+	public static final int BIGDECIMAL_DEFAULT_ROUND_MODE = BigDecimal.ROUND_HALF_EVEN;
+	public static final int BIGDECIMAL_DEFAULT_NUMBER_OF_DECIMALS = 2;
+	
 	public static String toCurrency(Double d, Integer qtd_decimals) {
 	    if (d == null || "".equals(d) || "NaN".equals(d)) {
 	        return null;
@@ -49,6 +52,41 @@ public class NumberUtils {
 					+ cep.toString().substring(2, 5) + "-"
 					+ cep.toString().substring(5, 8);
 		} throw new RuntimeException("CEP inválido ou já formatado.");
+	}
+	
+	public static boolean isBigger(BigDecimal v1, BigDecimal v2, int quantidadeCasasDecimais) {
+		v1 = changeNumberDecimals(v1, quantidadeCasasDecimais);
+		v2 = changeNumberDecimals(v2, quantidadeCasasDecimais);
+		return v1.compareTo(v2) > 0;
+	}
+	
+	public static boolean isBigger(BigDecimal v1, BigDecimal v2) {
+		return isBigger(v1, v2, BIGDECIMAL_DEFAULT_NUMBER_OF_DECIMALS);
+	}
+	
+	public static boolean isSmaller(BigDecimal v1, BigDecimal v2, int quantidadeCasasDecimais) {
+		v1 = changeNumberDecimals(v1, quantidadeCasasDecimais);
+		v2 = changeNumberDecimals(v2, quantidadeCasasDecimais);
+		return v1.compareTo(v2) < 0;
+	}
+	
+	public static boolean isSmaller(BigDecimal v1, BigDecimal v2) {
+		return isSmaller(v1, v2, BIGDECIMAL_DEFAULT_NUMBER_OF_DECIMALS);
+	}
+	
+	public static boolean equals(BigDecimal v1, BigDecimal v2, int quantidadeCasasDecimais) {
+		v1 = changeNumberDecimals(v1, quantidadeCasasDecimais);
+		v2 = changeNumberDecimals(v2, quantidadeCasasDecimais);
+		return v1.compareTo(v2) == 0;
+	}
+	
+	public static boolean equals(BigDecimal v1, BigDecimal v2) {
+		return equals(v1, v2, BIGDECIMAL_DEFAULT_NUMBER_OF_DECIMALS);
+	}
+	
+	public static BigDecimal changeNumberDecimals(BigDecimal valor, int quantidadeCasasDecimais) {
+		if (valor == null) return null;
+		return valor.setScale(quantidadeCasasDecimais, BIGDECIMAL_DEFAULT_ROUND_MODE);
 	}
 	
 }
