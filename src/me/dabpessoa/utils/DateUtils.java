@@ -54,6 +54,19 @@ public class DateUtils {
 		return c.getTime();
 	}
 	
+	public static Date addJumpWeekends(Date date, int field, int amount) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		int quantity = Math.abs(amount);
+		for (int i = 0 ; i < quantity ; i++) {
+			if ( (c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ) || ( c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY )) {
+				quantity++;
+			}
+			c.add(field, (amount > 0 ? 1 : -1));
+		}
+		return c.getTime();
+	}
+	
 	public static boolean after(Date d1, Date d2, String format) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -155,6 +168,6 @@ public class DateUtils {
 	
 	public static Date parse(String date) {
 		return parse(date, DEFAULT_DATE_PATTERN);
-	}
+	}	
 	
 }
