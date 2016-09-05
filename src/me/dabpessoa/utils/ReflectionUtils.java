@@ -60,6 +60,11 @@ public class ReflectionUtils {
 		return null;
 	}
 	
+	public static Object findFieldValue(Object entity, String fieldName) {
+		Field field = findFieldByName(entity.getClass(), fieldName);
+		return findFieldValue(entity, field);
+	}
+	
 	public static void setFieldValue(Object entity, Field field, Object value) throws IllegalArgumentException, IllegalAccessException {
 		field.setAccessible(true);
 		field.set(entity, value);
