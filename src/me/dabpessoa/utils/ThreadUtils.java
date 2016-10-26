@@ -3,6 +3,10 @@ package me.dabpessoa.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author dabpessoa [dabpessoa@gmail.com]
+ * @since 2016.10.25
+ */
 public class ThreadUtils {
 	
 	public static void main(String[] args) {
