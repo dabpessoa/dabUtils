@@ -177,7 +177,3 @@ interface ThreadListener {
 	void threadFinished(ThreadBean threadBean, int threadNumber);
 	void allThreadsFinished(ThreadBean threadBean);
 }
-
-interface EndListener {
-	void endNotify(ThreadBean threadBean);
-}
