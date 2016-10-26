@@ -68,7 +68,7 @@ public class ThreadUtils {
 		
 	}
 	
-	class MyRunnable implements Runnable {
+	private class MyRunnable implements Runnable {
 		
 		private ThreadListener listener;
 		private ThreadBean threadBean;
