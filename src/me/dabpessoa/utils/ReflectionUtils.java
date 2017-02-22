@@ -24,6 +24,13 @@ public class ReflectionUtils {
 	
 	public ReflectionUtils() {}
 
+	public static Object findFirstFieldValueByAnnotation(Object entity, Class<?> annotationClass) {
+		List<Object> values = findFieldsValueByAnnotation(entity, annotationClass);
+		if (values == null || values.size() == 0) {
+			return null;
+		} return values.get(0);
+	}
+
 	public static List<Object> findFieldsValueByAnnotation(Object entity, Class<?> annotationClass) {
 		List<Object> values = new ArrayList<Object>();
 		List<Field> fields = findFieldsByAnnotation(entity.getClass(), annotationClass);
@@ -102,7 +109,14 @@ public class ReflectionUtils {
 		return null;
 		
 	}
-	
+
+	public static <T> Field findFirstFieldByAnnotation(Class<T> clazz, Class<?> annotationClass) {
+		List<Field> fields = findFieldsByAnnotation(clazz, annotationClass);
+		if (fields != null && fields.size() > 0) {
+			return fields.get(0);
+		} return null;
+	}
+
 	public static <T> List<Field> findFieldsByAnnotation(Class<T> clazz, Class<?> annotationClass) {
 		List<Field> fields = new ArrayList<Field>();
 		Field[] fs = clazz.getDeclaredFields();
