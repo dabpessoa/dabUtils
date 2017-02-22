@@ -14,7 +14,68 @@ import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 public abstract class StringUtils {
-	
+
+	public static String padLeft(String string, char c, Integer quantidade) {
+		if (!hasLength(string)) return string;
+		StringBuilder sb = new StringBuilder(string);
+		int count = 0;
+		while(count++ < quantidade) {
+			sb.insert(0, c);
+		}
+		return sb.toString();
+	}
+
+	public static String padRight(String string, char c, Integer quantidade) {
+		if (!hasLength(string)) return string;
+		StringBuilder sb = new StringBuilder(string);
+		while(quantidade-- > 0) {
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+
+	public static String unwrap(String string, char c) {
+		return unwrap(string, c, null);
+	}
+
+	public static String unwrap(String string, char c, Integer quantidade) {
+		String s = unPadLef(string, c, quantidade);
+		return unPadRight(s, c, quantidade);
+	}
+
+	public static String unPadLeft(String string, char c) {
+		return unPadLef(string, c, null);
+	}
+
+	public static String unPadRight(String string, char c) {
+		return unPadRight(string, c, null);
+	}
+
+	public static String unPadLef (String string, char c, Integer quantidade) {
+		if (!hasLength(string)) return string;
+		StringBuilder sb = new StringBuilder(string);
+		while (sb.length() > 0) {
+			if (sb.charAt(0) == c) {
+				sb.deleteCharAt(0);
+			} else {
+				break;
+			}
+		} return sb.toString();
+	}
+
+	public static String unPadRight (String string, char c, Integer quantidade) {
+		if (!hasLength(string)) return string;
+		StringBuilder sb = new StringBuilder(string);
+		while (sb.length() > 0) {
+			int pos = sb.length()-1;
+			if (sb.charAt(pos) == c) {
+				sb.deleteCharAt(pos);
+			} else {
+				break;
+			}
+		} return sb.toString();
+	}
+
 	public static boolean hasLength(CharSequence string) {
 		return (isNotNull(string) && (string.length() > 0));
 	}
