@@ -1,4 +1,4 @@
-package src.me.dabpessoa.utils;
+package me.dabpessoa.utils;
 
 import org.hibernate.Hibernate;
 
