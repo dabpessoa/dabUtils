@@ -1,0 +1,18 @@
+package src.me.dabpessoa.utils;
+
+import org.hibernate.Hibernate;
+
+/**
+ * Created by dabpessoa [dabpessoa@gmail.com] on 01/03/2017.
+ */
+public class HibernateUtils {
+
+    public static boolean isInitialized(Object proxy) {
+        return Hibernate.isInitialized(proxy);
+    }
+
+    public static void initialize(Object proxy) {
+        Hibernate.initialize(proxy);
+    }
+
+}
